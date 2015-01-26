@@ -1,0 +1,3 @@
+[submodule "virtualbeep"]
+	path = virtualbeep
+	url = git@github.com:/santiagotorres/virtualbeep
