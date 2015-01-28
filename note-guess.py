@@ -79,9 +79,11 @@ if __name__ == "__main__":
     play_sin_beep(secs = 3, notefreq = frequency)
 
     choices = []
-    choices.append(random.choice(NOTE_NAMES))
-    choices.append(random.choice(NOTE_NAMES))
-    choices.append(name)
+    choices.append("{}{}".format(random.choice(NOTE_NAMES),
+        random.randint(octave - 1, octave + 1)))
+    choices.append("{}{}".format(random.choice(NOTE_NAMES),
+        random.randint(octave - 1, octave + 1)))
+    choices.append("{}{}".format(name, octave))
     random.shuffle(choices)
 
     guess = None
@@ -93,7 +95,7 @@ if __name__ == "__main__":
         if guess not in choices:
             print("This is a wrong guess, try again")
 
-    if guess == name:
+    if guess == "{}{}".format(name,octave):
         print("Correct!")
 
     else:
