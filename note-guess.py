@@ -15,7 +15,7 @@
 
 """
 import random
-from virtualbeep.virtualbeep import play_beep
+from virtualbeep.virtualbeep import play_sin_beep
 
 # we will define a table of the first octave
 C      = 16.35 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     frequency, name, octave = pick_random_note()
 
-    play_beep(secs = 3, notefreq = frequency)
+    play_sin_beep(secs = 3, notefreq = frequency)
 
     choices = []
     choices.append(random.choice(NOTE_NAMES))
