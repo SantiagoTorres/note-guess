@@ -15,6 +15,7 @@
 
 """
 import random
+import argparse
 from virtualbeep.virtualbeep import play_sin_beep
 
 # we will define a table of the first octave
@@ -74,15 +75,27 @@ def pick_random_note(octaves = 2, start = 4):
 
 if __name__ == "__main__":
 
-    frequency, name, octave = pick_random_note()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--octaves','-o', metavar = 'octave', 
+        default = 4, dest = 'octaves', nargs = '?',
+        help='The number of octaves to consider')
+    parser.add_argument('--start', '-s', metavar = 'start', 
+        default = 2, dest = 'start', nargs = '?',
+        help='The starting octave')
+    
+    args = parser.parse_args()
+    start = int(args.start)
+    octaves = int(args.octaves)
+
+    frequency, name, octave = pick_random_note(octaves, start)
 
     play_sin_beep(secs = 3, notefreq = frequency)
 
     choices = []
     choices.append("{}{}".format(random.choice(NOTE_NAMES),
-        random.randint(octave - 1, octave + 1)))
+        random.randint(start, start + octaves)))
     choices.append("{}{}".format(random.choice(NOTE_NAMES),
-        random.randint(octave - 1, octave + 1)))
+        random.randint(start, start + octaves)))
     choices.append("{}{}".format(name, octave))
     random.shuffle(choices)
 
@@ -100,7 +113,7 @@ if __name__ == "__main__":
 
     else:
         print("That was a wrong guess :(")
-        print("The right guess was {}".format(name))
+        print("The right guess was {}{}".format(name, octave))
 
     
 
